@@ -1,3 +1,4 @@
+import PostThumbnail from '@/components/PostThumbnail';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
@@ -32,13 +33,17 @@ function Library() {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main>
-            <h1>Library {id}</h1>
-            <p>{posts.map((value:any)=>{
+        <main className='p-16'>
+            <div className='py-5'>
+                <h1 className='text-5xl'>Library</h1>
+            </div>
+            <div className='flex'>
+                {posts.map((value:any)=>{
                 return (
-                    value.title.rendered
+                    <PostThumbnail title={value.title.rendered} excerpt={value.excerpt.rendered.substr(3,50) + "..."}/>
                 )
-            })}</p>
+                })}
+            </div>
         </main>
     </>
 
