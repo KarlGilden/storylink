@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
-import WPAPI from 'wpapi'
 
 function Library() {    
     
@@ -12,29 +11,17 @@ function Library() {
     const router = useRouter()
     const { id } = router.query
 
-    // init wordpress endpoint
-    const wp = new WPAPI({
-        endpoint: 'http://storylink.local/wp-json',
-      });
-
-
     useEffect(()=>{
         getPosts()
     },[id])
 
     const getPosts = async () => {
-        console.log({id})
-        if(typeof id !== "string") return
-        await wp.categories().slug( id )
-        .then(res => {
-            var category = res[0];
-            return wp.posts().categories( category.id );
+        if(!id) return 
+        fetch(`/api/${id}/posts`)
+        .then(res => res.json())
+        .then(data =>{
+            setPosts(data)
         })
-        .then(categoryPosts => {
-            console.log( categoryPosts );
-            setPosts(categoryPosts)
-        });
-        
     }
 
   return (
