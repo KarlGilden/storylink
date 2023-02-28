@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
+import CardButton from '@/components/CardButton'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,8 +21,8 @@ export default function Home() {
           <h1 className='text-6xl'>StoryLink</h1>
           <div className='p-5'></div>
           <div className='flex justify-center font-bold'>
-            <Link href={`/en/library`}><div className='px-2 py-1 flex justify-center items-center rounded-sm hover:scale-105 transform transition duration-250 hover:shadow-lang-card cursor-pointer'>English</div></Link>
-            <Link href={`/ta/library`}><div className='px-2 py-1 flex justify-center items-center rounded-sm hover:scale-105 transform transition duration-250 hover:shadow-lang-card cursor-pointer'>Tagalog</div></Link>
+            <CardButton code="en">English</CardButton>
+            <CardButton code="ta">Tagalog</CardButton>
           </div>
         </div>
       </main>

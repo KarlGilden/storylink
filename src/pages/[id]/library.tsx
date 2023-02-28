@@ -3,16 +3,20 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import WPAPI from 'wpapi'
 
-function Library() {
+function Library() {    
+    
+    // state
+    const [posts, setPosts] = useState([])
 
+    // path props
+    const router = useRouter()
+    const { id } = router.query
+
+    // init wordpress endpoint
     const wp = new WPAPI({
         endpoint: 'http://storylink.local/wp-json',
       });
 
-      const router = useRouter()
-      const { id } = router.query
-
-    const [posts, setPosts] = useState([])
 
     useEffect(()=>{
         getPosts()
@@ -33,11 +37,6 @@ function Library() {
         
     }
 
-    const getCategories = async () => {
-        
-    }
-
-
   return (
     <>
         <Head>
@@ -47,7 +46,7 @@ function Library() {
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <main>
-            <h1>library {id}</h1>
+            <h1>Library {id}</h1>
             <p>{posts.map((value:any)=>{
                 return (
                     value.title.rendered
