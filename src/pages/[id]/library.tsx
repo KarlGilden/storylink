@@ -37,12 +37,15 @@ function Library() {
             <div className='py-5'>
                 <h1 className='text-5xl'>Library</h1>
             </div>
-            <div className='flex'>
-                {posts.map((value:any)=>{
-                return (
-                    <PostThumbnail title={value.title.rendered} excerpt={value.excerpt.rendered.substr(3,50) + "..."}/>
-                )
-                })}
+            <div className=''>
+                <h2 className='text-2xl'>Short stories</h2>
+                <div className='flex'>
+                    {posts.map((value:any)=>{
+                    return (
+                        <PostThumbnail title={value.title.rendered} excerpt={value.excerpt.rendered.substr(3,50) + "..."}/>
+                    )
+                    })}
+                </div>
             </div>
         </main>
     </>
