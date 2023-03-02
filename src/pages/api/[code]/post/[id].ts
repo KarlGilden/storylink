@@ -7,26 +7,25 @@ type Data = {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  getAllPosts(req, res)
+  getPost(req, res)
 }
 
-const getAllPosts = (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const getPost = (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
   const wp = new WPAPI({
     endpoint: 'http://storylink.local/wp-json',
   });
 
-  const { code } = req.query
+  const { id } = req.query
 
-  if(typeof code !== "string") return
+  if(typeof id !== "string") return
 
-  wp.categories().slug( code )
+  wp.posts().id( parseInt(id) )
   .then(res => {
-      var category = res[0];
-      return wp.posts().categories( category.id );
+    return res
   })
-  .then(categoryPosts => {
-      console.log( categoryPosts );
-      res.status(200).json(categoryPosts)
+  .then(post => {
+      console.log( post );
+      res.status(200).json(post)
   });
 }

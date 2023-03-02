@@ -10,15 +10,15 @@ function Library() {
 
     // path props
     const router = useRouter()
-    const { id } = router.query
+    const { code } = router.query
 
     useEffect(()=>{
         getPosts()
-    },[id])
+    },[code])
 
     const getPosts = async () => {
-        if(!id) return 
-        fetch(`/api/${id}/posts`)
+        if(!code) return 
+        fetch(`/api/${code}/posts`)
         .then(res => res.json())
         .then(data =>{
             setPosts(data)
@@ -42,7 +42,7 @@ function Library() {
                 <div className='flex'>
                     {posts.map((value:any)=>{
                     return (
-                        <PostThumbnail title={value.title.rendered} excerpt={value.excerpt.rendered.substr(3,50) + "..."}/>
+                        <PostThumbnail key={value.id} id={value.id} title={value.title.rendered} excerpt={value.excerpt.rendered.substr(3,50) + "..."}/>
                     )
                     })}
                 </div>
